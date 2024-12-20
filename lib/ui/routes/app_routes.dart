@@ -1,17 +1,26 @@
+import 'package:coffee/ui/pages/home_page.dart';
+import 'package:coffee/ui/pages/product_detail_page.dart';
 import 'package:flutter/material.dart';
-import '../pages/login_page.dart';
-import '../pages/home_page.dart';
-import '../pages/favorites_page.dart';
+import 'package:go_router/go_router.dart';
 
-class AppRoutes {
-  static const initial = '/';
-  static const home = '/home';
-  static const favorites = '/favorites';
-
-  static Map<String, WidgetBuilder> routes = {
-    initial: (context) => LoginPage(),
-    home: (context) => const HomePage(),
-    favorites: (context) =>
-        const FavoritesPage(userId: '1'), // Replace '1' with actual userId
-  };
-}
+final GoRouter router = GoRouter(
+  initialLocation: '/',
+  routes: [
+    GoRoute(
+      path: '/',
+      builder: (context, state) => const HomePage(),
+    ),
+    GoRoute(
+      path: '/product-detail/:id',
+      builder: (context, state) {
+        final productId = state.pathParameters['id'];
+        return ProductDetailPage(productId: productId);
+      },
+    ),
+  ],
+  errorBuilder: (context, state) => const Scaffold(
+    body: Center(
+      child: Text('Страница не найдена!'),
+    ),
+  ),
+);

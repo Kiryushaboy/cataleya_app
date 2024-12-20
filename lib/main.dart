@@ -1,21 +1,38 @@
-import 'package:coffee/ui/resources/app_theme.dart';
+// lib/main.dart
+import 'package:coffee/domain/api/repositories/products_repository.dart';
+import 'package:coffee/domain/blocs/products_bloc/products_bloc.dart';
 import 'package:coffee/ui/routes/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
-  runApp(const CoffeeRoasteryApp());
+  runApp(
+    BlocProvider(
+      create: (context) => ProductsBloc(
+        productsRepository: ProductsRepository(),
+      ),
+      child: const CataleyaApp(),
+    ),
+  );
 }
 
-class CoffeeRoasteryApp extends StatelessWidget {
-  const CoffeeRoasteryApp({super.key});
+class CataleyaApp extends StatelessWidget {
+  const CataleyaApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'My App',
-      theme: AppTheme.lightTheme,
-      initialRoute: AppRoutes.initial,
-      routes: AppRoutes.routes,
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData.light(),
+          routerConfig: router,
+        );
+      },
     );
   }
 }

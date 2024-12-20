@@ -1,27 +1,20 @@
-import 'dart:convert';
+// import 'package:meta/meta.dart';
 
-import 'package:bloc/bloc.dart';
-import 'package:coffee/domain/api/api_service.dart';
-import 'package:meta/meta.dart';
+// part 'favorites_event.dart';
+// part 'favorites_state.dart';
 
-part 'favorites_event.dart';
-part 'favorites_state.dart';
+// class FavoritesBloc {
+//   final _favoritesController = StreamController<List<String>>.broadcast();
+//   List<String> _favorites = [];
 
-class FavoritesBloc extends Cubit<List<dynamic>> {
-  final ApiService _apiService = ApiService();
+//   Stream<List<String>> get favoritesStream => _favoritesController.stream;
 
-  FavoritesBloc() : super([]);
+//   void addFavorite(String itemId) {
+//     _favorites.add(itemId);
+//     _favoritesController.sink.add(_favorites);
+//   }
 
-  Future<void> loadFavorites(String userId) async {
-    try {
-      final response = await _apiService.fetchFavorites(userId);
-      if (response.statusCode == 200) {
-        emit(List<dynamic>.from(jsonDecode(response.data)));
-      } else {
-        emit([]);
-      }
-    } catch (_) {
-      emit([]);
-    }
-  }
-}
+//   void dispose() {
+//     _favoritesController.close();
+//   }
+// }
