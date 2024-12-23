@@ -1,8 +1,6 @@
-import 'package:coffee/domain/blocs/products_bloc/products_bloc.dart';
 import 'package:coffee/ui/components/filter_button.dart';
 import 'package:coffee/ui/components/product_card_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CatalogBodyWidget extends StatefulWidget {
@@ -27,6 +25,40 @@ class _HomeScreenWidgetState extends State<CatalogBodyWidget>
     _tabController.dispose();
     super.dispose();
   }
+
+  final List<Map<String, String>> products = [
+    {
+      "name": "Кофе Арабика",
+      "price": "120 000 сум",
+      "image": "https://via.placeholder.com/150"
+    },
+    {
+      "name": "Кофе Робуста",
+      "price": "100 000 сум",
+      "image": "https://via.placeholder.com/150"
+    },
+    {
+      "name": "Кофе Латте",
+      "price": "80 000 сум",
+      "image": "https://via.placeholder.com/150"
+    },
+    {
+      "name": "Кофе Капучино",
+      "price": "85 000 сум",
+      "image": "https://via.placeholder.com/150"
+    },
+    {
+      "name": "Кофе Ристретто",
+      "price": "22 000 сум",
+      "image": "https://via.placeholder.com/150"
+    },
+    {
+      "name": "Кофе Американо",
+      "price": "25 000 сум",
+      "image": "https://via.placeholder.com/150"
+    },
+    // Добавить больше товаров по необходимости
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -80,29 +112,24 @@ class _HomeScreenWidgetState extends State<CatalogBodyWidget>
           ],
         ),
         Expanded(
-          child: BlocBuilder<ProductsBloc, ProductsState>(
-            builder: (context, state) {
-              if (state is ProductsLoading) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (state is ProductsLoaded) {
-                final products = state.products;
-                return ListView.builder(
-                  itemCount: products.length,
-                  itemBuilder: (context, index) {
-                    final product = products[index];
-                    return ProductCardWidget(product: product);
-                  },
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 1,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                childAspectRatio: 0.8, // Пропорции карточки
+              ),
+              itemCount: products.length,
+              itemBuilder: (context, index) {
+                return ProductCardWidget(
+                  name: products[index]["name"]!,
+                  price: products[index]["price"]!,
+                  image: products[index]["image"]!,
                 );
-              } else if (state is ProductsError) {
-                return Center(
-                  child: Text(
-                    'Ошибка загрузки продуктов',
-                    style: TextStyle(fontSize: 18.sp, color: Colors.red),
-                  ),
-                );
-              }
-              return const Center(child: Text('Неизвестное состояние'));
-            },
+              },
+            ),
           ),
         ),
       ],
