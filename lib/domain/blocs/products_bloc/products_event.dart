@@ -1,6 +1,6 @@
 part of 'products_bloc.dart';
 
 @immutable
-abstract class ProductsEvent {}
+sealed class ProductsEvent {}
 
-class LoadProducts extends ProductsEvent {}
+final class ProductsLoadEvent extends ProductsEvent {}

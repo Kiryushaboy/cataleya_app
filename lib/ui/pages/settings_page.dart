@@ -4,10 +4,10 @@ class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
 
   @override
-  _SettingsPageState createState() => _SettingsPageState();
+  SettingsPageState createState() => SettingsPageState();
 }
 
-class _SettingsPageState extends State<SettingsPage> {
+class SettingsPageState extends State<SettingsPage> {
   String userName = "Имя пользователя";
   String userPhone = "+998 90 123 45 67";
   String userEmail = "user@example.com";
@@ -58,7 +58,7 @@ class _SettingsPageState extends State<SettingsPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Настройки"),
-        backgroundColor: Colors.brown,
+        backgroundColor: Colors.red,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -73,7 +73,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   child: const Align(
                     alignment: Alignment.bottomRight,
                     child: CircleAvatar(
-                      backgroundColor: Colors.brown,
+                      backgroundColor: Colors.red,
                       radius: 16,
                       child: Icon(Icons.edit, size: 16, color: Colors.white),
                     ),
@@ -97,7 +97,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ElevatedButton(
                 onPressed: _saveSettings,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.brown,
+                  backgroundColor: Colors.red,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
                 ),
@@ -122,7 +122,7 @@ class _SettingsPageState extends State<SettingsPage> {
         labelText: label,
         border: const OutlineInputBorder(),
         focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.brown),
+          borderSide: BorderSide(color: Colors.red),
         ),
       ),
     );

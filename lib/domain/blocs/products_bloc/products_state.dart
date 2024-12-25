@@ -1,15 +1,16 @@
 part of 'products_bloc.dart';
 
 @immutable
-abstract class ProductsState {}
+sealed class ProductsState {}
 
-class ProductsInitial extends ProductsState {}
+final class ProductsInitial extends ProductsState {}
 
-class ProductsLoading extends ProductsState {}
+final class LoadingState extends ProductsState {}
 
-class ProductsLoaded extends ProductsState {
-  final List<dynamic> products; // Replace `dynamic` with your product model
-  ProductsLoaded({required this.products});
+final class LoadedState extends ProductsState {
+  final TestProducts parameters;
+
+  LoadedState({required this.parameters});
 }
 
-class ProductsError extends ProductsState {}
+final class ErrorState extends ProductsState {}

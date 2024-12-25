@@ -1,7 +1,6 @@
-// lib/main.dart
 import 'package:coffee/domain/api/repositories/products_repository.dart';
 import 'package:coffee/domain/blocs/products_bloc/products_bloc.dart';
-import 'package:coffee/ui/routes/app_routes.dart';
+import 'package:coffee/ui/routes/app_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,14 +22,14 @@ class CataleyaApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(375, 812),
+      designSize: const Size(375, 812), // Размер дизайна
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp.router(
           debugShowCheckedModeBanner: false,
           theme: ThemeData.light(),
-          routerConfig: router,
+          routerConfig: AppNavigator.routes,
         );
       },
     );

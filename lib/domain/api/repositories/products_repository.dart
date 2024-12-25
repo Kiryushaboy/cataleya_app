@@ -1,6 +1,6 @@
+import 'package:coffee/domain/api/api_service.dart';
+import 'package:coffee/domain/models/test_products.dart';
+
 class ProductsRepository {
-  Future<List<dynamic>> fetchProducts() async {
-    // Replace with actual API call or data fetching logic
-    return [];
-  }
+  Future<TestProducts> getAllProducts() => ApiService.getNowProducts();
 }
